@@ -9,10 +9,6 @@ jobs:
   build:
     runs-on: windows-latest
 
-    defaults:
-      run:
-        working-directory: Kagami_rpaGO
-
     steps:
       - uses: actions/checkout@v4
 
@@ -29,4 +25,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: Kagami_rpaGO-windows
-          path: Kagami_rpaGO/artifacts/Kagami_rpaGO.exe
+          path: artifacts/Kagami_rpaGO.exe
