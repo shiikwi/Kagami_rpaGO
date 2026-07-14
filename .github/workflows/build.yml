@@ -1,0 +1,32 @@
+name: build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    defaults:
+      run:
+        working-directory: Kagami_rpaGO
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.25.x"
+
+      - name: Prepare artifacts directory
+        run: New-Item -ItemType Directory -Force artifacts | Out-Null
+
+      - name: Build
+        run: go build -buildvcs=false -o artifacts/Kagami_rpaGO.exe .
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Kagami_rpaGO-windows
+          path: Kagami_rpaGO/artifacts/Kagami_rpaGO.exe
